@@ -43,6 +43,13 @@
                 </ul>
             </section>
 
+            {{-- Posts --}}
+            <section class="mt-5 space-y-2 p-2">
+
+                <livewire:post.item />
+
+            </section>
+
         </aside>
 
         {{-- Suggestions --}}
