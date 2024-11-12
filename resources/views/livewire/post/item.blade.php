@@ -1,28 +1,69 @@
 <div class="max-w-lg mx-auto">
-    {{-- Header --}}
-
+    <!-- Header -->
     <header class="flex items-center gap-3">
-        <x-avatar  src="https://randomuser.me/api/portraits/men/{{ rand(1, 99) }}.jpg" class="h-14 w-14"/>
-
+        <x-avatar src="https://randomuser.me/api/portraits/men/{{ rand(1, 99) }}.jpg" class="h-14 w-14" />
         <div class="grid grid-cols-7 w-full gap-2">
             <div class="col-span-5">
-                <h5 class="font-semibold truncate text-sm">{{fake()->name('male')}}</h5>
+                <h5 class="font-semibold truncate text-sm">{{ fake()->name('male') }}</h5>
             </div>
-
-            <div class="col-span-2 flex text-right justify-end">
+            <div class="col-span-2 flex justify-end">
                 <button class="text-gray-500 ml-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
                     </svg>
                 </button>
             </div>
         </div>
     </header>
 
-    {{-- main --}}
+    <!-- Main Content -->
     <main>
         <div class="my-2">
-            <x-video />
+            <!-- Swiper container -->
+            <div class="swiper h-[500px] border bg-white" x-init="
+                new Swiper($el, {
+                    modules: [Navigation, Pagination],
+                    loop: true,
+                    pagination: { el: '.swiper-pagination', clickable: true },
+                    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                });
+            ">
+
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide"><x-video /></div>
+                    
+                    <div class="swiper-slide">
+                        <img src="https://cdn.pixabay.com/photo/2024/03/05/10/46/ai-generated-8614327_1280.png"
+                            alt="" class="h-[500px] w-full object-scale-down" />
+                    </div>
+                    
+                    <div class="swiper-slide"><img src="https://i.pinimg.com/564x/8e/31/46/8e3146ee6282a5e6fc1e6b5a8b420129.jpg" alt="" class="h-[500px] w-full object-scale-down"></div>
+                
+                </div>
+                <!-- Pagination and Navigation -->
+                <div class="swiper-pagination"></div>
+
+
+                {{---Prev----}}
+                <div class="swiper-button-prev absolute top-1/2 z-10 p-2">
+                    <div class="bg-white/95 border p-1 rounded-full text-gray-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.8" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                        </svg>
+                    </div>
+                </div>
+
+                {{---Next----}}
+                <div class="swiper-button-next absolute right-0 top-1/2 z-10 p-2">
+                    <div class="bg-white/95 border p-1 rounded-full text-gray-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.8" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </main>
 
@@ -44,7 +85,7 @@
 
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send w-5 h-5" viewBox="0 0 16 16">
-                    <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+                    <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
                 </svg>
             </span>
 
@@ -67,7 +108,7 @@
         </div>
 
         {{---view post modal----}}
-        <button  class="text-state-500/90 text-sm font-medium">
+        <button class="text-state-500/90 text-sm font-medium">
             View all 456 comments
         </button>
 
