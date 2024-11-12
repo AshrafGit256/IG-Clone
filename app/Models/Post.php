@@ -20,10 +20,10 @@ class Post extends Model
         'allow_commenting'=>'boolean'
     ];
 
-    // function media () : MorphMany {
+    function media () : MorphMany {
 
-    //     return $this->morphMany(related: Media::class, name: 'mediable');
-    // }
+        return $this->morphMany(related: Media::class, name: 'mediable');
+    }
 
     function user() : BelongsTo {
 

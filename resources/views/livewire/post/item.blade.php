@@ -4,7 +4,7 @@
         <x-avatar src="https://randomuser.me/api/portraits/men/{{ rand(1, 99) }}.jpg" class="h-14 w-14" />
         <div class="grid grid-cols-7 w-full gap-2">
             <div class="col-span-5">
-                <h5 class="font-semibold truncate text-sm">{{ fake()->name('male') }}</h5>
+                <h5 class="font-semibold truncate text-sm">{{ $post->user->name }}</h5>
             </div>
             <div class="col-span-2 flex justify-end">
                 <button class="text-gray-500 ml-auto">
@@ -29,21 +29,31 @@
                 });
             ">
 
-                <div class="swiper-wrapper">
+                <ul x-cloak class="swiper-wrapper">
                     <!-- Slides -->
-                    <div class="swiper-slide"><x-video /></div>
-                    
-                    <div class="swiper-slide">
-                        <img src="https://cdn.pixabay.com/photo/2024/03/05/10/46/ai-generated-8614327_1280.png"
-                            alt="" class="h-[500px] w-full object-scale-down" />
-                    </div>
-                    
-                    <div class="swiper-slide"><img src="https://i.pinimg.com/564x/8e/31/46/8e3146ee6282a5e6fc1e6b5a8b420129.jpg" alt="" class="h-[500px] w-full object-scale-down"></div>
-                
-                </div>
+                    @foreach ($post->media as $file)
+                    <li class="swiper-slide">
+                        @switch($file->mime)
+
+                        @case('video')
+                        <x-video source="{{$file->url}}" />
+                        @break
+
+                        @case('image')
+                        <img src="{{$file->url}}" alt="" class="h-[500px] w-full object-scale-down" />
+                        @break
+
+
+                        @endswitch
+                    </li>
+                    @endforeach
+
+                </ul>
                 <!-- Pagination and Navigation -->
                 <div class="swiper-pagination"></div>
 
+
+                @if(count($post->media)>1)
 
                 {{---Prev----}}
                 <div class="swiper-button-prev absolute top-1/2 z-10 p-2">
@@ -62,6 +72,8 @@
                         </svg>
                     </div>
                 </div>
+
+                @endif
 
             </div>
         </div>
@@ -102,8 +114,8 @@
 
         {{---name and comment----}}
         <div class="flex text-sm gap-2 font-medium">
-            <p> <strong class="font-bold">{{fake()->name('male')}}</strong>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores maiores odit similique repellat, officia recusandae, rerum illo, alias nostrum obcaecati laboriosam dolorem praesentium? Distinctio officia praesentium quas dolor iure vero!
+            <p> <strong class="font-bold">{{ $post->user->name }}</strong>
+                {{ $post->description }}
             </p>
         </div>
 
