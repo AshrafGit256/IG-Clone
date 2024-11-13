@@ -16,7 +16,7 @@
             </svg>
         </div>
 
-        <img x-cloak x-show="!(shrink ||drawer)" src="{{asset('assets/igg.png')}}" class="h-25 w-44 text-black"
+        <img x-cloak x-show="!(shrink ||drawer)" src="{{asset('assets/Wechat3.png')}}" class="h-25 w-44 text-black"
             alt="logo">
     </div>
 
@@ -136,7 +136,8 @@
             </a></li>
 
         <li>
-            <div onclick="Livewire.dispatch('openModal', { component: 'post.create' })" class="flex items-center gap-5">
+            <div onclick="Livewire.dispatch('openModal', { component: 'post.create' })" 
+                 onclick="Livewire.dispatch('openModal', { component: 'post.create' })" class="flex items-center gap-5">
 
                 <span class="border border-gray-600  rounded-lg p-px">
 
@@ -155,8 +156,7 @@
         <li>
             <a wire:navigate href="" class="flex items-center gap-5">
 
-            <x-avatar src="https://randomuser.me/api/portraits/lego/1.jpg" class="h-14 w-14"/>
-
+            <x-avatar class="w-10 h-10" />
 
                 <h4 x-cloak x-show="!(shrink||drawer)"
                     class=" text-lg">Profile</h4>

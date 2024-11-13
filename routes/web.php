@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Livewire component route
-Route::get('/', Home::class); // This is correct for rendering the Livewire component
+Route::get('/', Home::class)->middleware( middleware:'auth'); // This is correct for rendering the Livewire component
 
 // Dashboard route
 Route::get('/dashboard', function () {

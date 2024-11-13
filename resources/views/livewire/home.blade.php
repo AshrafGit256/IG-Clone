@@ -34,11 +34,11 @@
                 <ul class="flex overflow-x-auto scrollbar-hide items-center gap-2">
 
                     @for ($i = 0; $i < 15; $i++)
-                    <li class="flex flex-col justify-center w-20 gap-1 p-2">
-                        <x-avatar story src="https://randomuser.me/api/portraits/men/{{ rand(1, 99) }}.jpg" class="h-16 w-16"/>
+                        <li class="flex flex-col justify-center w-20 gap-1 p-2">
+                        <x-avatar story src="https://randomuser.me/api/portraits/men/{{ rand(1, 99) }}.jpg" class="h-16 w-16" />
                         <p class="text-xs font-medium truncate"> {{fake()->name('male')}}</p>
-                    </li>
-                    @endfor
+                        </li>
+                        @endfor
 
                 </ul>
             </section>
@@ -48,11 +48,11 @@
 
                 @if ($posts)
 
-                    @foreach($posts->take(10) as $post)
-                        <livewire:post.item wire:key="post-{{$post->id }}" :post="$post" />
-                    @endforeach
+                @foreach($posts->take(10) as $post)
+                <livewire:post.item wire:key="post-{{$post->id }}" :post="$post" />
+                @endforeach
                 @else
-                    <p class="font-bol flex justify-center">No posts</p>
+                <p class="font-bol flex justify-center">No posts</p>
                 @endif
 
             </section>
@@ -60,38 +60,36 @@
         </aside>
 
         {{-- Suggestions --}}
-        <aside class="lg:col-span-4 hidden lg:block p-4">
+        <aside class="lg:col-span-4 hidden lg:block p-4 sticky top-0 h-screen overflow-y-auto">
             <div class="flex items-center gap-2">
                 <x-avatar src="https://randomuser.me/api/portraits/men/{{ rand(1, 99) }}.jpg" class="w-16 h-16" />
                 <h4 class="font-medium"> {{fake()->name('male')}} </h4>
             </div>
 
-            {{----Suggestions---}}
+            <!-- Suggestions Section -->
             <section class="mt-4">
-                <h4 class="font-bold text-gray-700/95"> Suggestions for you</h4>
+                <h4 class="font-bold text-gray-700/95">Suggestions for you</h4>
                 <ul class="my-2 space-y-3">
-                    
                     @for($i = 0; $i < 5; $i++)
-                    <li class="flex items-center gap-3">
-                    <x-avatar src="https://randomuser.me/api/portraits/men/{{ rand(1, 99) }}.jpg" class="w-16 h-16" />
+                        <li class="flex items-center gap-3">
+                        <x-avatar src="https://randomuser.me/api/portraits/men/{{ rand(1, 99) }}.jpg" class="w-16 h-16" />
 
-                    <div class="grid grid-cols-7 w-full gap-2">
-                        <div class="col-span-5">
-                            <h5 class="font-semibold truncate text-sm">{{fake()->name('male')}}</h5>
-                            <p class="text-xs truncate"> Followed by {{fake()->name('male')}}</p>
+                        <div class="grid grid-cols-7 w-full gap-2">
+                            <div class="col-span-5">
+                                <h5 class="font-semibold truncate text-sm">{{fake()->name('male')}}</h5>
+                                <p class="text-xs truncate"> Followed by {{fake()->name('male')}}</p>
+                            </div>
+
+                            <div class="col-span-2 flex text-right justify-end mr-20">
+                                <button class="font-bold text-blue-500 ml-auto text-sm">Follow</button>
+                            </div>
                         </div>
-
-                        <div class="col-span-2 flex text-right justify-end mr-20">
-                            <button class="font-bold text-blue-500 ml-auto text-sm">Follow</button>
-                        </div>
-                    </div>
-
-                    </li>
-                    @endfor
+                        </li>
+                        @endfor
                 </ul>
             </section>
 
-            {{----App links---}}
+            <!-- App Links Section -->
             <section class="mt-5">
                 <ol class="flex gap-2 flex-wrap">
                     <li class="text-xs text-gray-800/90 font-medium"><a href="#" class="hover:underline">About</a></li>
@@ -105,9 +103,7 @@
                 <ul class="text-lg text-gray-800/90 font-medium mt-10">
                     <a href="#" class="hover:underline"> @ {{ date('Y') }} INSTAGRAM COURSE</a>
                 </ul>
-
             </section>
-
         </aside>
 
     </main>

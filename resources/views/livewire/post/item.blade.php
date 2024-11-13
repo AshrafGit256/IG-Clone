@@ -120,7 +120,7 @@
         </div>
 
         {{---view post modal----}}
-        <button class="text-state-500/90 text-sm font-medium">
+        <button onclick="Livewire.dispatch('openModal', { component: 'post.view.modal', arguments: { postId: {{ $post->id }} } })" class="text-state-500/90 text-sm font-medium">
             View all 456 comments
         </button>
 
