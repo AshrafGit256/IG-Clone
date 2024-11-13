@@ -38,17 +38,6 @@ class Modal extends ModalComponent
         <main class="bg-white h-[calc(100vh_-_3.5rem)] md:h-[calc(100vh_-_5rem)] flex flex-col border gap-y-4 px-5">
             {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
 
-            <header class="w-full py-2">
-                <div class="flex justify-end">
-                    <!-- Close modal with wire directive -->
-                    <button wire:click="$dispatch('closeModal')" type="button" class="xl font-bold">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-            </header>
-
             <livewire:post.view.item :post="$this->post" />
             
         </main>
