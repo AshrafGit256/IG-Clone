@@ -1,4 +1,21 @@
-<div class="w-full h-full">
+<div
+    x-data="{
+    canLoadMore:@entangle('canLoadMore')
+    }"
+
+    @scroll.window="
+        scrollTop = window.scrollY;
+        divHeight = window.innerHeight;
+        scrollHeight = document.documentElement.scrollHeight;
+
+        isScrolled = scrollTop + divHeight >= scrollHeight - 1;
+
+        if (isScrolled && canLoadMore) {
+            @this.loadMore();
+        }
+    "
+
+    class="w-full h-full">
     {{-- Header --}}
     <header class="md:hidden sticky top-0 bg-white">
         <div class="grid grid-cols-12 gap-2 item-center mt-1">
@@ -48,7 +65,7 @@
 
                 @if ($posts)
 
-                @foreach($posts->take(10) as $post)
+                @foreach($posts as $post)
                 <livewire:post.item wire:key="post-{{$post->id }}" :post="$post" />
                 @endforeach
                 @else
