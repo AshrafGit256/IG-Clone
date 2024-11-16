@@ -58,6 +58,7 @@ class Home extends Component
 
     function mount()
     {
+        // $this->posts = Post::latest()->get();
         $this->loadPosts();
     }
 

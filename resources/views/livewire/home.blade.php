@@ -4,16 +4,17 @@
     }"
 
     @scroll.window="
-        scrollTop = window.scrollY;
-        divHeight = window.innerHeight;
-        scrollHeight = document.documentElement.scrollHeight;
+scrollTop = window.scrollY;
+divHeight = window.innerHeight;
+scrollHeight = document.documentElement.scrollHeight;
 
-        isScrolled = scrollTop + divHeight >= scrollHeight - 1;
+isScrolled = scrollTop + divHeight >= scrollHeight - 1;
 
-        if (isScrolled && canLoadMore) {
-            @this.loadMore();
-        }
-    "
+if (isScrolled && canLoadMore) {
+    @this.loadMore();
+}
+"
+
 
     class="w-full h-full">
     {{-- Header --}}
