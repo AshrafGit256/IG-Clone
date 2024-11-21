@@ -1,5 +1,5 @@
 <div class="flex items-center gap-3 w-11/12 ml-auto py-2">
-    <x-avatar src="https://randomuser.me/api/portraits/men/{{ rand(1, 10) }}.jpg" class="h-10 w-10 mb-auto" />
+    <x-avatar wire:ignore src="https://randomuser.me/api/portraits/men/{{ rand(1, 10) }}.jpg" class="h-10 w-10 mb-auto" />
     <div class="grid grid-cols-7 w-full gap-2">
         <div class="col-span-6 flex flex-wrap text-sm">
             <p>
