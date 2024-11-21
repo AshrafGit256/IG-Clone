@@ -124,11 +124,37 @@
             View all {{$post->comments->count()}} comments
         </button>
 
+        @auth
+        {{---- show comments from auth------}}
+        <ul class="my-2">
+            @foreach($post->comments()->where('user_id',auth()->id())->get() as $comment)
+            <li class="grid grid-cols-12 text-sm items-center">
+                <span class="font-bold col-span-3 mb-auto">{{auth()->user()->name}}</span>
+                <span class="col-span-8">{{$comment->body}}</span>
+                <button class="col-span-1 mb-auto flex justify-end pr-px">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                    </svg>
+                </button>
+            </li>
+            @endforeach
+        </ul>
+        @endauth
+
         {{----leave a comment-----}}
-        <form x-data="{inputText:''}" class="grid grid-cols-12 item-center w-full">
+        <form
+            wire:key='{{time()}}'
+            @submit.prevent="$wire.addComment()"
+            x-data="{body:@entangle('body')}" class="grid grid-cols-12 item-center w-full">
             @csrf
 
-            <input x-model="inputText" type="text" placeholder="Leave a comment" class="border-0 col-span-10 placeholder:text-sm outline-none focus:outline-none px-0 rounded-lg hover:ring-0 focus:ring-0">
+            <input x-model="body" type="text" placeholder="Leave a comment" class="border-0 col-span-10 placeholder:text-sm outline-none focus:outline-none px-0 rounded-lg hover:ring-0 focus:ring-0">
+
+            <div class="col-span-1 ml-auto flex justify-end text-right">
+                <button type="submit" x-cloak x-show="body.length>0" class="text-sm font-semibold flex justify-end text-blue-500">
+                    Post
+                </button>
+            </div>
 
             <div class="col-span-1 flex justify-center items-right ml-auto">
                 <button type="button" @click="showEmojiPicker = !showEmojiPicker" class="text-gray-500 text-lg">
@@ -136,11 +162,7 @@
                 </button>
             </div>
 
-            <div class="col-span-1 ml-auto flex justify-end text-right">
-                <button x-cloak x-show="inputText.length>0" class="text-sm font-semibold flex justify-end text-blue-500">
-                    Post
-                </button>
-            </div>
+
 
             <span class="col-span-1 ml-auto">
 

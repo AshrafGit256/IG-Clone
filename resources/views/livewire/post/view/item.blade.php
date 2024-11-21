@@ -48,63 +48,16 @@
             <section class="flex flex-col gap-2">
 
                 {{----main comment-----}}
-                <div class="flex items-center gap-3 py-2">
-                    <x-avatar story src="https://randomuser.me/api/portraits/men/{{ rand(1, 10) }}.jpg" class="h-12 w-12 mb-auto" />
-                    <div class="grid grid-cols-7 w-full gap-2">
-                        <div class="col-span-6 flex flex-wrap text-sm">
-                            <p>
-                                <span class="font-bold text-sm"> {{$comment->user->name}} </span>
-                                {{$comment->body}}
-                            </p>
-                        </div>
 
-                        <div class="col-span-1 flex text-right justify-end mb-auto">
-                            <button class="font-bold text-sm ml-auto">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                                </svg>
-                            </button>
-                        </div>
-
-                        <div class="col-span-7 flex gap-2 text-sm items-center text-gray-700">
-                            <span>{{$comment->created_at->diffForHumans()}}</span>
-                            <span class="font-bold">345 Likes</span>
-                            <span class="font-bold">Reply</span>
-                        </div>
-                    </div>
-                </div>
-
+                @include('livewire.post.view.partials.comment')
 
                 @if($comment->replies)
 
                 @foreach($comment->replies as $reply)
                 {{----reply-------}}
-                <div class="flex items-center gap-3 w-11/12 ml-auto py-2">
-                    <x-avatar story src="https://randomuser.me/api/portraits/men/{{ rand(1, 10) }}.jpg" class="h-10 w-10 mb-auto" />
-                    <div class="grid grid-cols-7 w-full gap-2">
-                        <div class="col-span-6 flex flex-wrap text-sm">
-                            <p>
-                                <span class="font-bold text-sm"> {{$reply->user->name}} </span>
-                                <span class="font-bold">@ {{$reply->parent->user->name}}</span>
-                                {{$reply->body}}
-                            </p>
-                        </div>
 
-                        <div class="col-span-1 flex text-right justify-end mb-auto">
-                            <button class="font-bold text-sm ml-auto">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                                </svg>
-                            </button>
-                        </div>
+                @include('livewire.post.view.partials.reply')
 
-                        <div class="col-span-7 flex gap-2 text-sm items-center text-gray-700">
-                            <span>{{$comment->created_at->diffForHumans()}}</span>
-                            <span class="font-bold">345 Likes</span>
-                            <span class="font-bold">Reply</span>
-                        </div>
-                    </div>
-                </div>
                 @endforeach
 
                 @endif
@@ -113,7 +66,7 @@
             @endforeach
 
             @else
-                <p>No comments available for this post</p>
+            <p>No comments available for this post</p>
             @endif
         </main>
 
@@ -163,25 +116,26 @@
             </button>
 
             {{----leave a comment-----}}
-            <form x-data="{inputText:''}" class="grid grid-cols-12 item-center w-full">
+            <form 
+            wire:key='{{time()}}'
+            x-data="{body:@entangle('body')}" 
+            @submit.prevent="$wire.addComment()" class="grid grid-cols-12 item-center w-full">
                 @csrf
 
-                <input x-model="inputText" type="text" placeholder="Leave a comment" class="border-0 col-span-10 placeholder:text-sm outline-none focus:outline-none px-0 rounded-lg hover:ring-0 focus:ring-0">
-
-                <div class="col-span-1 flex justify-center items-right ml-auto">
-                    <button type="button" @click="showEmojiPicker = !showEmojiPicker" class="text-gray-500 text-lg">
-                        😀
-                    </button>
-                </div>
+                <input x-model="body" type="text" placeholder="Leave a comment" class="border-0 col-span-10 placeholder:text-sm outline-none focus:outline-none px-0 rounded-lg hover:ring-0 focus:ring-0">
 
                 <div class="col-span-1 ml-auto flex justify-end text-right">
-                    <button x-cloak x-show="inputText.length>0" class="text-sm font-semibold flex justify-end text-blue-500">
+                    <button type="submit" x-cloak x-show="body.length >0" class="text-sm font-semibold flex justify-end text-blue-500">
                         Post
                     </button>
                 </div>
 
                 <span class="col-span-1 ml-auto">
-
+                    <div class="col-span-1 flex justify-center items-right ml-auto">
+                        <button type="button" @click="showEmojiPicker = !showEmojiPicker" class="text-gray-500 text-lg">
+                            😀
+                        </button>
+                    </div>
                 </span>
             </form>
 
