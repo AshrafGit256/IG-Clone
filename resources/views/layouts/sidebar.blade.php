@@ -152,9 +152,10 @@
             </div>
         </li>
 
+        @auth
 
         <li>
-            <a wire:navigate href="" class="flex items-center gap-5">
+            <a href="" wire:navigate href="" class="flex items-center gap-5">
 
             <x-avatar class="w-10 h-10" />
 
@@ -162,8 +163,6 @@
                     class=" text-lg">Profile</h4>
             </a>
         </li>
-        @auth
-
         
         @endauth
 

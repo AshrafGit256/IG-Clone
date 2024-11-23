@@ -53,7 +53,7 @@ if (isScrolled && canLoadMore) {
 
                     @for ($i = 0; $i < 15; $i++)
                         <li class="flex flex-col justify-center w-20 gap-1 p-2">
-                        <x-avatar story src="https://randomuser.me/api/portraits/men/{{ rand(1, 99) }}.jpg" class="h-16 w-16" />
+                        <x-avatar wire:ignore story src="https://randomuser.me/api/portraits/men/{{ rand(1, 99) }}.jpg" class="h-16 w-16" />
                         <p class="text-xs font-medium truncate"> {{fake()->name('male')}}</p>
                         </li>
                         @endfor
@@ -80,7 +80,7 @@ if (isScrolled && canLoadMore) {
         {{-- Suggestions --}}
         <aside class="lg:col-span-4 hidden lg:block p-4 sticky top-0 h-screen overflow-y-auto">
             <div class="flex items-center gap-2">
-                <x-avatar src="https://randomuser.me/api/portraits/men/{{ rand(1, 99) }}.jpg" class="w-16 h-16" />
+                <x-avatar wire:ignore src="https://randomuser.me/api/portraits/men/{{ rand(1, 99) }}.jpg" class="w-16 h-16" />
                 <h4 class="font-medium"> {{fake()->name('male')}} </h4>
             </div>
 
@@ -88,22 +88,31 @@ if (isScrolled && canLoadMore) {
             <section class="mt-4">
                 <h4 class="font-bold text-gray-700/95">Suggestions for you</h4>
                 <ul class="my-2 space-y-3">
-                    @for($i = 0; $i < 5; $i++)
-                        <li class="flex items-center gap-3">
-                        <x-avatar src="https://randomuser.me/api/portraits/men/{{ rand(1, 99) }}.jpg" class="w-16 h-16" />
+
+                    @foreach ($suggestedUsers as $key=> $user)
+
+                    <li class="flex items-center gap-3">
+                        <x-avatar wire:ignore src="https://randomuser.me/api/portraits/men/{{ $key }}.jpg" class="w-16 h-16" />
 
                         <div class="grid grid-cols-7 w-full gap-2">
                             <div class="col-span-5">
-                                <h5 class="font-semibold truncate text-sm">{{fake()->name('male')}}</h5>
-                                <p class="text-xs truncate"> Followed by {{fake()->name('male')}}</p>
+                                <h5 class="font-semibold truncate text-sm">{{$user->name}}</h5>
+                                <p class="text-xs truncate" wire:ignore> Followed by {{fake()->name}}</p>
                             </div>
 
                             <div class="col-span-2 flex text-right justify-end mr-20">
-                                <button class="font-bold text-blue-500 ml-auto text-sm">Follow</button>
+                                @if (auth()->user()->isFollowing($user))
+                                <button wire:click="toggleFollow({{$user->id}})" class="font-bold text-blue-500 ml-auto text-sm">Following</button>
+                                @else
+                                <button wire:click="toggleFollow({{$user->id}})" class="font-bold text-blue-500 ml-auto text-sm">Follow</button>
+                                @endif
+                                
                             </div>
                         </div>
-                        </li>
-                        @endfor
+                    </li>
+
+                    @endforeach
+                
                 </ul>
             </section>
 
