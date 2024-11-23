@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProfileHome;
 use App\Livewire\Home;
+use App\Livewire\Profile\Home as ProfileHome;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Livewire component route
-Route::get('/', Home::class)->middleware( middleware:'auth'); // This is correct for rendering the Livewire component
+Route::get('/', Home::class)->middleware(middleware: 'auth'); // This is correct for rendering the Livewire component
 
 // Dashboard route
 Route::get('/dashboard', function () {
@@ -30,7 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/profile/{user}', [ProfileHome::class, 'show'])->name('profile.home');
+    Route::get('/profile/{user}',ProfileHome::class)->name('profile.home');
+    // Route::get('/profile/{user}/reels',Reels::class)->name('profile.reels');
+    // Route::get('/profile/{user}/saved',Saved::class)->name('profile.saved');;
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
