@@ -155,14 +155,15 @@
         @auth
 
         <li>
-            <a href="" wire:navigate href="" class="flex items-center gap-5">
+            <a href="{{route('profile.home',auth()->user()->username)}}" wire:navigate href="" class="flex items-center gap-5">
 
-            <x-avatar class="w-10 h-10" />
+            <x-avatar src="https://randomuser.me/api/portraits/men/1.jpg" class="w-10 h-10" />
 
                 <h4 x-cloak x-show="!(shrink||drawer)"
                     class=" text-lg">Profile</h4>
             </a>
         </li>
+
         
         @endauth
 

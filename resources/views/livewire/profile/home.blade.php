@@ -1,5 +1,11 @@
-<div>
-    {{-- Care about people's approval and you will be their prisoner. --}}
-
-    home
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Home</title>
+</head>
+<body>
+    <h1>Welcome to {{ $user }}'s profile</h1>
+</body>
+</html>
