@@ -42,7 +42,7 @@
 
         {{-- Avatar --}}
         <div class="col-span-4 flex items-center">
-            <x-avatar src="https://randomuser.me/api/portraits/men/1.jpg" class="w-20 h-20 lg:h-44 lg:w-44 m-auto" />
+            <x-avatar src="https://randomuser.me/api/portraits/men/{{ rand(1, 99) }}.jpg" class="w-20 h-20 lg:h-44 lg:w-44 m-auto" />
         </div>
 
         <aside class="col-span-8 lg:max-w-2xl lg:mx-auto flex flex-col gap-5">

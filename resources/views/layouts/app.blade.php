@@ -26,7 +26,7 @@
         <!-- Drawer toggle for mobile -->
         <input id="my-drawer-2" type="checkbox" class="drawer-toggle">
 
-        <div class="drawer-content flex flex-col items-center justify-center">
+        <div class="drawer-content  items-center justify-center">
             <!-- Page content button for toggling drawer on mobile -->
             <!-- <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">
                 Open drawer

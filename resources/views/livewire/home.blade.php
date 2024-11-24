@@ -92,11 +92,13 @@ if (isScrolled && canLoadMore) {
                     @foreach ($suggestedUsers as $key=> $user)
 
                     <li class="flex items-center gap-3">
-                        <x-avatar wire:ignore src="https://randomuser.me/api/portraits/men/{{ $key }}.jpg" class="w-16 h-16" />
+                        <a href="{{route('profile.home',$user->username)}}">
+                            <x-avatar wire:ignore src="https://randomuser.me/api/portraits/men/{{ $key }}.jpg" class="w-16 h-16" />
+                        </a>
 
                         <div class="grid grid-cols-7 w-full gap-2">
                             <div class="col-span-5">
-                                <h5 class="font-semibold truncate text-sm">{{$user->name}}</h5>
+                                <a href="{{route('profile.home',$user->username)}}" class="font-semibold truncate text-sm">{{$user->name}}</a>
                                 <p class="text-xs truncate" wire:ignore> Followed by {{fake()->name}}</p>
                             </div>
 
@@ -106,13 +108,13 @@ if (isScrolled && canLoadMore) {
                                 @else
                                 <button wire:click="toggleFollow({{$user->id}})" class="font-bold text-blue-500 ml-auto text-sm">Follow</button>
                                 @endif
-                                
+
                             </div>
                         </div>
                     </li>
 
                     @endforeach
-                
+
                 </ul>
             </section>
 
