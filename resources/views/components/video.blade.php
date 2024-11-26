@@ -6,7 +6,7 @@
 
 <div x-data="{playing:false, muted:false}" class="relative h-full w-full m-auto" @click.outside="$refs.player.pause()" x-intersect:leave="$refs.player.pause()">
 
-    <video x-ref="player" @play="playing=true" @pause="playing=false" class="h-full max-h-[500px] w-full {{$cover==true?'object-cover':''}}">
+    <video x-ref="player" @play="playing=true" @pause="playing=false" class="h-full max-h-[800px] m-auto w-full {{$cover==true?'object-cover':''}}">
         <source src="{{$source}}" type="video/mp4">
         Your browser doesnot support Html5 video
     </video>

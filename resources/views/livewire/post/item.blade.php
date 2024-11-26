@@ -81,6 +81,7 @@
 
     {{-- footer --}}
     <footer>
+        {{---- Actions -----}}
         <div class="flex gap-4 items-center my-2">
 
             {{--- heart ---}}
