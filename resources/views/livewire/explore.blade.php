@@ -8,7 +8,7 @@
         $cover= $post->media()->first();
         @endphp
 
-        <li class="h-28 sm:h-80 w-full cursor-pointer border rounded bg-black relative items-center flex justify-center group">
+        <li onclick="Livewire.dispatch('openModal', { component: 'post.view.modal', arguments: { postId: {{ $post->id }} } })" class="h-28 sm:h-80 w-full cursor-pointer border rounded bg-black relative items-center flex justify-center group">
 
             {{------ Hover show comments and likes ---------}}
             <div class="hidden group-hover:flex transition-all absolute inset-x-0 m-auto z-10 max-w-fit items-center gap-2">
@@ -79,7 +79,7 @@
 
             @switch($cover->mime)
             @case('video')
-            <x-video source="{{$cover->url}}" />
+            <x-video :controls="false" :cover="true" source="{{$cover->url}}" />
             @break
             @case('image')
 

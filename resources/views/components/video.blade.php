@@ -1,13 +1,17 @@
 @props([
-    'source'=>'https://cdn.devdojo.com/pines/videos/coast.mp4'    
+    'source'=>'https://cdn.devdojo.com/pines/videos/coast.mp4',
+    'controls'=> true,
+    'cover'=> false,    
 ])
 
 <div x-data="{playing:false, muted:false}" class="relative h-full w-full m-auto" @click.outside="$refs.player.pause()" x-intersect:leave="$refs.player.pause()">
 
-    <video x-ref="player" @play="playing=true" @pause="playing=false" class="h-full max-h-[500px] w-full">
+    <video x-ref="player" @play="playing=true" @pause="playing=false" class="h-full max-h-[500px] w-full {{$cover==true?'object-cover':''}}">
         <source src="{{$source}}" type="video/mp4">
         Your browser doesnot support Html5 video
     </video>
+
+    @if($controls==true)
 
     {{--- Play --}}
     <div x-cloak x-show="!playing" @click="$refs.player.play()" class="absolute z-10 inset-0 flex items-center justify-center w-full h-full cursor-pointer">
@@ -44,5 +48,7 @@
         
 
     </div>
+
+    @endif
 
 </div>
