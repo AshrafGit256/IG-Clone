@@ -165,10 +165,11 @@
             </li>
 
             {{-- reels --}}
-            <li class="flex items-center gap-2 py-2 cursor-pointer  ">
+            <li class="flex items-center gap-2 py-2 cursor-pointer {{request()->routeIs('profile.reels')?'border-t border-black':''}} ">
                 {{-- border icon from bootsrap icons --}}
 
-                <a wire:navigate class="flex items-center gap-2 py-2 cursor-pointer">
+                <a wire:navigate class="flex items-center gap-2 py-2 cursor-pointer"
+                    href="{{route('profile.reels',$user->username)}}">
 
 
                     <span>
@@ -194,10 +195,10 @@
             @if ( auth()->user()->id==$user->id)
 
             {{-- Saved --}}
-            <li class="flex items-center gap-2 py-2 cursor-pointer ">
+            <li class="flex items-center gap-2 py-2 cursor-pointer {{request()->routeIs('profile.saved')?'border-t border-black':''}} ">
                 {{-- Tag icon from bootsrap icons --}}
 
-                <a wire:navigate class="flex items-center gap-2 py-2 cursor-pointer">
+                <a wire:navigate class="flex items-center gap-2 py-2 cursor-pointer" href="{{route('profile.saved',$user->username)}}">
 
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
