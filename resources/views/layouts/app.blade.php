@@ -37,7 +37,7 @@
         </div>
 
         <!-- Sidebar Drawer Content -->
-        <div class="drawer-side">
+        <div class="drawer-side overflow-visible z-110">
             <label for="my-drawer-2"  class="drawer-overlay"></label>
 
             <!-- @include('layouts.sidebar') -->
